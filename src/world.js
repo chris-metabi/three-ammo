@@ -41,6 +41,7 @@ const World = function(worldConfig) {
   this.physicsWorld.setGravity(gravity);
   Ammo.destroy(gravity);
   this.physicsWorld.getSolverInfo().set_m_numIterations(worldConfig.solverIterations || 10);
+  console.log("Physics world constructed!!!");
 };
 
 World.prototype.isDebugEnabled = function() {
@@ -51,6 +52,7 @@ World.prototype.isDebugEnabled = function() {
 World.prototype.addBody = function(body, object3D, group, mask) {
   this.physicsWorld.addRigidBody(body, group, mask);
   this.object3Ds.set(Ammo.getPointer(body), object3D);
+  console.log("Physics world adding a body!");
 };
 
 /* @param {Ammo.btCollisionObject} body */
