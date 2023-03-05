@@ -136,6 +136,9 @@ const tick = () => {
         case MESSAGE_TYPES.ACTIVATE_BODY:
           activateBody(message);
           break;
+        case MESSAGE_TYPES.SET_LINEAR_VELOCITY:
+            setLinearVelocity(message);
+            break;
         default:
           console.error("Unknown message in queue", message);
           break;
@@ -308,6 +311,13 @@ function resetDynamicBody({ uuid }) {
 function activateBody({ uuid }) {
   if (bodies[uuid]) {
     bodies[uuid].physicsBody.activate();
+  }
+}
+
+function setLinearVelocity({ uuid, vec }) {
+  if (bodies[uuid]) {
+    bodies[uuid].physicsBody.getLinearVelocity().setValue(vec.x,vec.y,vec.z);
+    console.log("setting linear velocity on ammo.worker!" );//+ vec.x + " " + vec.y + " " + vec.z);// + val.toString() );
   }
 }
 

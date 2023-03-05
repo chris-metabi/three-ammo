@@ -119,6 +119,14 @@ export const WorkerHelpers = function(ammoWorker) {
     });
   };
 
+  const setLinearVelocity = function(uuid,vec) {
+    ammoWorker.postMessage({
+      type: MESSAGE_TYPES.SET_LINEAR_VELOCITY,
+      uuid,
+      vec
+    });
+  };
+
   return {
     addBody,
     updateBody,
@@ -129,6 +137,7 @@ export const WorkerHelpers = function(ammoWorker) {
     removeConstraint,
     enableDebug,
     resetDynamicBody,
-    activateBody
+    activateBody,
+    setLinearVelocity
   };
 };
