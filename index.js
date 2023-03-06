@@ -127,6 +127,14 @@ export const WorkerHelpers = function(ammoWorker) {
     });
   };
 
+  const setAngularVelocity = function(uuid,vec) {
+    ammoWorker.postMessage({
+      type: MESSAGE_TYPES.SET_ANGULAR_VELOCITY,
+      uuid,
+      vec
+    });
+  };
+
   return {
     addBody,
     updateBody,
@@ -138,6 +146,7 @@ export const WorkerHelpers = function(ammoWorker) {
     enableDebug,
     resetDynamicBody,
     activateBody,
-    setLinearVelocity
+    setLinearVelocity,
+    setAngularVelocity
   };
 };

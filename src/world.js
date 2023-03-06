@@ -52,7 +52,7 @@ World.prototype.isDebugEnabled = function() {
 World.prototype.addBody = function(body, object3D, group, mask) {
   this.physicsWorld.addRigidBody(body, group, mask);
   this.object3Ds.set(Ammo.getPointer(body), object3D);
-  console.log("Physics world adding a body!");
+  console.log("Physics world adding a BODY!!!");
 };
 
 /* @param {Ammo.btCollisionObject} body */

@@ -137,8 +137,11 @@ const tick = () => {
           activateBody(message);
           break;
         case MESSAGE_TYPES.SET_LINEAR_VELOCITY:
-            setLinearVelocity(message);
-            break;
+          setLinearVelocity(message);
+          break;
+        case MESSAGE_TYPES.SET_ANGULAR_VELOCITY:
+          setAngularVelocity(message);
+          break;
         default:
           console.error("Unknown message in queue", message);
           break;
@@ -318,6 +321,13 @@ function setLinearVelocity({ uuid, vec }) {
   if (bodies[uuid]) {
     bodies[uuid].physicsBody.getLinearVelocity().setValue(vec.x,vec.y,vec.z);
     console.log("setting linear velocity on ammo.worker!" );//+ vec.x + " " + vec.y + " " + vec.z);// + val.toString() );
+  }
+}
+
+function setAngularVelocity({ uuid, vec }) {
+  if (bodies[uuid]) {
+    bodies[uuid].physicsBody.getAngularVelocity().setValue(vec.x,vec.y,vec.z);
+    console.log("setting angular velocity on ammo.worker!  " );//+ vec.x.toString() + " " + vec.y.toString() + " " + vec.z.toString());// + val.toString() );
   }
 }
 
