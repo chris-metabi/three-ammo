@@ -142,6 +142,12 @@ const tick = () => {
         case MESSAGE_TYPES.SET_ANGULAR_VELOCITY:
           setAngularVelocity(message);
           break;
+        case MESSAGE_TYPES.APPLY_FORCE:
+          applyForceToBody(message);
+          break;
+        case MESSAGE_TYPES.APPLY_IMPULSE:
+          applyImpulseToBody(message);
+          break;
         default:
           console.error("Unknown message in queue", message);
           break;
@@ -328,6 +334,33 @@ function setAngularVelocity({ uuid, vec }) {
   if (bodies[uuid]) {
     bodies[uuid].physicsBody.getAngularVelocity().setValue(vec.x,vec.y,vec.z);
     console.log("setting angular velocity on ammo.worker!  " );//+ vec.x.toString() + " " + vec.y.toString() + " " + vec.z.toString());// + val.toString() );
+  }
+}
+
+
+function applyForceToBody({ uuid, vec }) {
+  if (bodies[uuid]) {
+    //bodies[uuid].physicsBody.getLinearVelocity().setValue(vec.x,vec.y,vec.z);
+    //console.log("trying to apply force to body! ammo.worker!!  " + vec.x.toString() + " " + vec.y.toString() + " " + vec.z.toString());
+    //let impulseVec = new THREE.Vector3(0,50,0);
+    //let posVec = new THREE.Vector3(0,0,0);
+    //let tbv30 = new THREE.Vector3(x_var,1000,z_var);
+    //tbv30.setValue(x_var,1000,z_var);
+    //let btVec = new Ammo.btVector3(0, 0, 0);
+    bodies[uuid].physicsBody.applyForce(vec);
+  }
+}
+
+function applyImpulseToBody({ uuid, vec }) {
+  if (bodies[uuid]) {
+    //bodies[uuid].physicsBody.getLinearVelocity().setValue(vec.x,vec.y,vec.z);
+    //console.log("trying to apply impulse to body! ammo.worker!!  " + vec.x.toString() + " " + vec.y.toString() + " " + vec.z.toString());// + val.toString() );
+    //let impulseVec = new THREE.Vector3(0,50,0);
+    //let posVec = new THREE.Vector3(0,0,0); //NOPE: needs world position
+    //let tbv30 = new THREE.Vector3(x_var,1000,z_var);
+    //tbv30.setValue(x_var,1000,z_var);
+    //bodies[uuid].physicsBody.applyImpulse(impulseVec,posVec);//impulseVec
+    bodies[uuid].physicsBody.applyCentralImpulse(vec);
   }
 }
 
