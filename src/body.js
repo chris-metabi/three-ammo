@@ -52,9 +52,10 @@ function Body(bodyConfig, matrix, world) {
   const worldGravity = world.physicsWorld.getGravity();
   console.log("Three Ammo World Gravity: " + worldGravity.x() + " " + worldGravity.y() + " " + worldGravity.z());
   this.gravity = new Ammo.btVector3(worldGravity.x(), worldGravity.y(), worldGravity.z());
-  if (bodyConfig.gravity) {
-    this.gravity.setValue(bodyConfig.gravity.x, bodyConfig.gravity.y, bodyConfig.gravity.z);
-  }
+  //metabi - can't find where we set this on the client side, so let's default to world gravity.
+  //if (bodyConfig.gravity) {
+  //  this.gravity.setValue(bodyConfig.gravity.x, bodyConfig.gravity.y, bodyConfig.gravity.z);
+  //}
   this.linearDamping = bodyConfig.hasOwnProperty("linearDamping") ? bodyConfig.linearDamping : 0.01;
   this.angularDamping = bodyConfig.hasOwnProperty("angularDamping") ? bodyConfig.angularDamping : 0.01;
   this.linearSleepingThreshold = bodyConfig.hasOwnProperty("linearSleepingThreshold")
