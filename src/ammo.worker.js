@@ -359,6 +359,7 @@ function applyForceToBody({ uuid, vec }) {
     
     bodies[uuid].physicsBody.applyCentralForce(new THREE.Vector3(vec.x,vec.y,vec.z));
     bodies[uuid].physicsBody.applyTorque(vec);
+    world.updateBody(bodies[uuid].physicsBody);
     //bodies[uuid].physicsBody.applyForce(vec,new THREE.Vector3(0,0,0));
     //bodies[uuid].physicsBody.applyForce(new Ammo.btVector3(vec.x,vec.y,vec.z));
     //bodies[uuid].physicsBody.applyForce(new THREE.Vector3(vec.x,vec.y,vec.z),new THREE.Vector3(0,0,0));
