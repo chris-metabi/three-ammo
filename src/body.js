@@ -233,6 +233,7 @@ Body.prototype.update = function(bodyConfig) {
   }
 
   if (bodyConfig.gravity) {
+    console.log("body config gravity " + bodyConfig.gravity.x + " " +  bodyConfig.gravity.y + " " +  bodyConfig.gravity.z );
     this.gravity.setValue(bodyConfig.gravity.x, bodyConfig.gravity.y, bodyConfig.gravity.z);
     if (!almostEqualsBtVector3(0.001, this.gravity, this.physicsBody.getGravity())) {
       if (!almostEqualsBtVector3(0.001, this.gravity, this.world.physicsWorld.getGravity())) {
@@ -403,5 +404,10 @@ Body.prototype.updateCollisionFlags = function() {
 Body.prototype.getVelocity = function() {
   return this.physicsBody.getLinearVelocity();
 };
+
+Body.prototype.applyForce = function(vec) {
+  console.log("CALLING APPLY FORCE PROTOTYPE FUNC! " + JSON.stringify(vec));
+};
+
 
 export default Body;
