@@ -405,9 +405,5 @@ Body.prototype.getVelocity = function() {
   return this.physicsBody.getLinearVelocity();
 };
 
-Body.prototype.applyForce = function() {
-  console.log("CALLING APPLY FORCE PROTOTYPE FUNC! ");
-};
-
 
 export default Body;
