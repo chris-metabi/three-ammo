@@ -354,8 +354,8 @@ function applyForceToBody({ uuid, vec }) {
     //tbv30.setValue(x_var,1000,z_var);
     //let btVec = new Ammo.btVector3(0, 0, 0);
     console.log("Over here in ammo worker, trying to apply force!!! " + JSON.stringify(vec));
-    let total = bodies[uuid].physicsBody.getTotalForce();
-    console.log("Total force: " + total.x() + " " + total.y() + " " + total.z());
+    //let total = bodies[uuid].physicsBody.getTotalForce();
+    //console.log("Total force: " + total.x() + " " + total.y() + " " + total.z());
     
     bodies[uuid].physicsBody.applyCentralForce(vec);
     //bodies[uuid].physicsBody.applyForce(vec,new THREE.Vector3(0,0,0));
