@@ -50,12 +50,11 @@ function Body(bodyConfig, matrix, world) {
   this.loadedEvent = bodyConfig.loadedEvent ? bodyConfig.loadedEvent : "";
   this.mass = bodyConfig.hasOwnProperty("mass") ? bodyConfig.mass : 1;
   const worldGravity = world.physicsWorld.getGravity();
-  console.log("bodyConfig: " + JSON.stringify(bodyConfig));
+  //console.log("bodyConfig: " + JSON.stringify(bodyConfig));
   this.gravity = new Ammo.btVector3(worldGravity.x(), worldGravity.y(), worldGravity.z());
-  //metabi - can't find where we set this on the client side, so let's default to world gravity.
-  //if (bodyConfig.gravity) {
-  //  this.gravity.setValue(bodyConfig.gravity.x, bodyConfig.gravity.y, bodyConfig.gravity.z);
-  //}
+  if (bodyConfig.gravity) {
+    this.gravity.setValue(bodyConfig.gravity.x, bodyConfig.gravity.y, bodyConfig.gravity.z);
+  }
   this.linearDamping = bodyConfig.hasOwnProperty("linearDamping") ? bodyConfig.linearDamping : 0.01;
   this.angularDamping = bodyConfig.hasOwnProperty("angularDamping") ? bodyConfig.angularDamping : 0.01;
   this.linearSleepingThreshold = bodyConfig.hasOwnProperty("linearSleepingThreshold")
@@ -233,8 +232,6 @@ Body.prototype.update = function(bodyConfig) {
     this.physicsBody.setDamping(this.linearDamping, this.angularDamping);
   }
 
-  //Metabi - HMMM can't find where we set bodyConfig gravity, so disabling for now.
-  /*
   if (bodyConfig.gravity) {
     console.log("body config gravity " + bodyConfig.gravity.x + " " +  bodyConfig.gravity.y + " " +  bodyConfig.gravity.z );
     this.gravity.setValue(bodyConfig.gravity.x, bodyConfig.gravity.y, bodyConfig.gravity.z);
@@ -246,7 +243,7 @@ Body.prototype.update = function(bodyConfig) {
       }
       this.physicsBody.setGravity(this.gravity);
     }
-  }*/
+  }
 
   if (
     (bodyConfig.linearSleepingThreshold && bodyConfig.linearSleepingThreshold != this.linearSleepingThreshold) ||
