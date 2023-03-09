@@ -50,7 +50,7 @@ function Body(bodyConfig, matrix, world) {
   this.loadedEvent = bodyConfig.loadedEvent ? bodyConfig.loadedEvent : "";
   this.mass = bodyConfig.hasOwnProperty("mass") ? bodyConfig.mass : 1;
   const worldGravity = world.physicsWorld.getGravity();
-  console.log("Three Ammo World Gravity: " + worldGravity.x() + " " + worldGravity.y() + " " + worldGravity.z());
+  console.log("bodyConfig: " + JSON.stringify(bodyConfig));
   this.gravity = new Ammo.btVector3(worldGravity.x(), worldGravity.y(), worldGravity.z());
   //metabi - can't find where we set this on the client side, so let's default to world gravity.
   //if (bodyConfig.gravity) {
@@ -233,6 +233,8 @@ Body.prototype.update = function(bodyConfig) {
     this.physicsBody.setDamping(this.linearDamping, this.angularDamping);
   }
 
+  //Metabi - HMMM can't find where we set bodyConfig gravity, so disabling for now.
+  /*
   if (bodyConfig.gravity) {
     console.log("body config gravity " + bodyConfig.gravity.x + " " +  bodyConfig.gravity.y + " " +  bodyConfig.gravity.z );
     this.gravity.setValue(bodyConfig.gravity.x, bodyConfig.gravity.y, bodyConfig.gravity.z);
@@ -244,7 +246,7 @@ Body.prototype.update = function(bodyConfig) {
       }
       this.physicsBody.setGravity(this.gravity);
     }
-  }
+  }*/
 
   if (
     (bodyConfig.linearSleepingThreshold && bodyConfig.linearSleepingThreshold != this.linearSleepingThreshold) ||
@@ -406,8 +408,8 @@ Body.prototype.getVelocity = function() {
   return this.physicsBody.getLinearVelocity();
 };
 
-Body.prototype.applyForce = function(vec) {
-  console.log("CALLING APPLY FORCE PROTOTYPE FUNC! " + JSON.stringify(vec));
+Body.prototype.applyForce = function() {
+  console.log("CALLING APPLY FORCE PROTOTYPE FUNC! ");
 };
 
 
