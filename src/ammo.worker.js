@@ -347,7 +347,7 @@ function applyForceToBody({ uuid, vec }) {
     //let tbv30 = new THREE.Vector3(x_var,1000,z_var);
     //tbv30.setValue(x_var,1000,z_var);
     //let btVec = new Ammo.btVector3(0, 0, 0);
-    bodies[uuid].physicsBody.applyForce(vec);
+    bodies[uuid].physicsBody.applyForce(new Ammo.btVector3(vec.x,vec.y,vec.z));
   }
 }
 
@@ -360,7 +360,7 @@ function applyImpulseToBody({ uuid, vec }) {
     //let tbv30 = new THREE.Vector3(x_var,1000,z_var);
     //tbv30.setValue(x_var,1000,z_var);
     //bodies[uuid].physicsBody.applyImpulse(impulseVec,posVec);//impulseVec
-    bodies[uuid].physicsBody.applyCentralImpulse(vec);
+    bodies[uuid].physicsBody.applyCentralImpulse(new Ammo.btVector3(vec.x,vec.y,vec.z));
   }
 }
 
