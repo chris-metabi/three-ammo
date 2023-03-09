@@ -353,6 +353,7 @@ function applyForceToBody({ uuid, vec }) {
     //let tbv30 = new THREE.Vector3(x_var,1000,z_var);
     //tbv30.setValue(x_var,1000,z_var);
     //let btVec = new Ammo.btVector3(0, 0, 0);
+    console.log("Over here in ammo worker, trying to apply force!!! " + JSON.stringify(vec));
     bodies[uuid].physicsBody.applyForce(vec);
     //bodies[uuid].physicsBody.applyForce(new Ammo.btVector3(vec.x,vec.y,vec.z));
     //bodies[uuid].physicsBody.applyForce(new THREE.Vector3(vec.x,vec.y,vec.z),new THREE.Vector3(0,0,0));
