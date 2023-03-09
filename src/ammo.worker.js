@@ -357,7 +357,7 @@ function applyForceToBody({ uuid, vec }) {
     //let total = bodies[uuid].physicsBody.getTotalForce();
     //console.log("Total force: " + total.x() + " " + total.y() + " " + total.z());
     
-    bodies[uuid].physicsBody.applyCentralForce(vec);
+    bodies[uuid].physicsBody.applyCentralForce(new THREE.Vector3(vec.x,vec.y,vec.z));
     //bodies[uuid].physicsBody.applyForce(vec,new THREE.Vector3(0,0,0));
     //bodies[uuid].physicsBody.applyForce(new Ammo.btVector3(vec.x,vec.y,vec.z));
     //bodies[uuid].physicsBody.applyForce(new THREE.Vector3(vec.x,vec.y,vec.z),new THREE.Vector3(0,0,0));
@@ -374,7 +374,8 @@ function applyImpulseToBody({ uuid, vec }) {
     //let tbv30 = new THREE.Vector3(x_var,1000,z_var);
     //tbv30.setValue(x_var,1000,z_var);
     //bodies[uuid].physicsBody.applyImpulse(impulseVec,posVec);//impulseVec
-    bodies[uuid].physicsBody.applyCentralImpulse(new THREE.Vector3(vec.x,vec.y,vec.z),new THREE.Vector3(0,0,0));
+    bodies[uuid].physicsBody.applyCentralImpulse(vec);
+    bodies[uuid].physicsBody.applyCentralImpulse(new THREE.Vector3(vec.x,vec.y,vec.z));//Why not both?
   }
 }
 
