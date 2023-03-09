@@ -50,6 +50,7 @@ function Body(bodyConfig, matrix, world) {
   this.loadedEvent = bodyConfig.loadedEvent ? bodyConfig.loadedEvent : "";
   this.mass = bodyConfig.hasOwnProperty("mass") ? bodyConfig.mass : 1;
   const worldGravity = world.physicsWorld.getGravity();
+  console.log("Three Ammo World Gravity: " + JSON.stringify(worldGravity));
   this.gravity = new Ammo.btVector3(worldGravity.x(), worldGravity.y(), worldGravity.z());
   if (bodyConfig.gravity) {
     this.gravity.setValue(bodyConfig.gravity.x, bodyConfig.gravity.y, bodyConfig.gravity.z);
@@ -401,6 +402,10 @@ Body.prototype.updateCollisionFlags = function() {
 
 Body.prototype.getVelocity = function() {
   return this.physicsBody.getLinearVelocity();
+};
+
+Body.prototype.applyForce = function(vec) {
+  this.physicsBody.applyForce(vec);
 };
 
 export default Body;

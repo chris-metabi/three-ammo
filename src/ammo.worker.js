@@ -337,6 +337,12 @@ function setAngularVelocity({ uuid, vec }) {
   }
 }
 
+function applyTorque({ uuid, vec }) {
+  
+  if (bodies[uuid]) {
+    bodies[uuid].physicsBody.applyTorque(vec);
+  }
+}
 
 function applyForceToBody({ uuid, vec }) {
   if (bodies[uuid]) {
@@ -347,8 +353,9 @@ function applyForceToBody({ uuid, vec }) {
     //let tbv30 = new THREE.Vector3(x_var,1000,z_var);
     //tbv30.setValue(x_var,1000,z_var);
     //let btVec = new Ammo.btVector3(0, 0, 0);
+    bodies[uuid].physicsBody.applyForce(vec);
     //bodies[uuid].physicsBody.applyForce(new Ammo.btVector3(vec.x,vec.y,vec.z));
-    bodies[uuid].physicsBody.applyForce(new THREE.Vector3(vec.x,vec.y,vec.z),new THREE.Vector3(0,0,0));
+    //bodies[uuid].physicsBody.applyForce(new THREE.Vector3(vec.x,vec.y,vec.z),new THREE.Vector3(0,0,0));
     //bodies[uuid].physicsBody.applyForce([vec.x,vec.y,vec.z],[0,0,0]);
   }
 }
