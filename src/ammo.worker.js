@@ -374,8 +374,9 @@ function applyImpulseToBody({ uuid, vec }) {
     //let tbv30 = new THREE.Vector3(x_var,1000,z_var);
     //tbv30.setValue(x_var,1000,z_var);
     //bodies[uuid].physicsBody.applyImpulse(impulseVec,posVec);//impulseVec
-    bodies[uuid].physicsBody.applyCentralImpulse(vec);
-    bodies[uuid].physicsBody.applyCentralImpulse(new THREE.Vector3(vec.x,vec.y,vec.z));//Why not both?
+    let btVec = new Ammo.btVector3(vec.x,vec.y,vec.z);
+    bodies[uuid].physicsBody.applyCentralImpulse(btVec);
+    //bodies[uuid].physicsBody.applyCentralImpulse(new THREE.Vector3(vec.x,vec.y,vec.z));//Why not both?
   }
 }
 
