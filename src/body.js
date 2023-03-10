@@ -405,5 +405,8 @@ Body.prototype.getVelocity = function() {
   return this.physicsBody.getLinearVelocity();
 };
 
+Body.prototype.doSomethingNew = function() {
+  console.log("can I do something new?????");
+}
 
 export default Body;
