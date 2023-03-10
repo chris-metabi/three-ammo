@@ -410,7 +410,7 @@ Body.prototype.doSomethingNew = function() {
 }
 
 Body.prototype.applyForceAtCenter = function(vec) {
-  console.log("applyForceAtCenter? " + JSON.stringify(vec));
+  //console.log("applyForceAtCenter? " + JSON.stringify(vec));
   let btVec = new Ammo.btVector3(vec.x,vec.y,vec.z);
   let btPos = new Ammo.btVector3(0,0,0);
   this.physicsBody.applyForce(btVec,btPos);
