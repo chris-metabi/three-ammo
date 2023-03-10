@@ -357,8 +357,8 @@ function applyForceToBody({ uuid, vec }) {
     bodies[uuid].doSomethingNew();
     //let total = bodies[uuid].physicsBody.getTotalForce();
     //console.log("Total force: " + total.x() + " " + total.y() + " " + total.z());
-    
-    bodies[uuid].physicsBody.applyForce(new THREE.Vector3(vec.x,vec.y,vec.z),new THREE.Vector3(0,0,0));
+    bodies[uuid].applyForceAtCenter(vec);
+    //bodies[uuid].physicsBody.applyForce(new THREE.Vector3(vec.x,vec.y,vec.z),new THREE.Vector3(0,0,0));
     //bodies[uuid].physicsBody.applyTorque(vec);
     //world.updateBody(bodies[uuid].physicsBody);
     //bodies[uuid].physicsBody.applyForce(vec,new THREE.Vector3(0,0,0));

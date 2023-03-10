@@ -409,4 +409,10 @@ Body.prototype.doSomethingNew = function() {
   console.log("can I do something new?????");
 }
 
+Body.prototype.applyForceAtCenter = function(vec) {
+  console.log("applyForceAtCenter? " + JSON.stringify(vec));
+  this.physicsBody.applyForce(vec, new THREE.Vector3(0,0,0));
+  this.world.updateBody(this.physicsBody);
+}
+
 export default Body;
