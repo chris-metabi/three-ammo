@@ -40,5 +40,8 @@
     "physics",
     "three",
     "three.js"
-  ]
+  ],
+  "dependencies": {
+    "rimraf": "^4.4.0"
+  }
 }
