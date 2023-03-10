@@ -411,7 +411,9 @@ Body.prototype.doSomethingNew = function() {
 
 Body.prototype.applyForceAtCenter = function(vec) {
   console.log("applyForceAtCenter? " + JSON.stringify(vec));
-  this.physicsBody.applyForce(vec, new THREE.Vector3(0,0,0));
+  let btVec = new Ammo.btVector3(vec.x,vec.y,vec.z);
+  let btPos = new Ammo.btVector3(0,0,0);
+  this.physicsBody.applyForce(btVec,btPos);
   this.world.updateBody(this.physicsBody);
 }
 
