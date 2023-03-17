@@ -217,7 +217,8 @@ Constraint.prototype.update = function(options) {
   console.log("physics constraint trying to update!!!  " + JSON.stringify(options));
   
   if (options.motorVelocity != undefined) { //Hm, are these only for hinge joints, though?
-    this.physicsConstraint.setMotorTargetVelocity(options.motorVelocity);
+    //this.physicsConstraint.setMotorTargetVelocity(options.motorVelocity);
+    this.physicsConstraint.enableAngularMotor(true,options.motorVelocity,3);//maybe??
   }
   if (options.motorImpulse != undefined) {
     this.physicsConstraint.setMaxMotorImpulse(options.motorImpulse);
