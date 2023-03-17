@@ -125,7 +125,16 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
       );
 
       //NEW, from MeTabi:
-      this.physicsConstraint.setLimit(-Math.PI/4, Math.PI/4, 0.9, 0.3, 1);
+      let limitHigh, limitLow;
+      if (constraintConfig.limitHigh != undefined) {
+        limitHigh = constraintConfig.limitHigh;
+        if (constraintConfig.limitLow != undefined) {
+          limitLow = constraintConfig.limitLow;
+        } else {
+          limitLow = constraintConfig.limitHigh * -1;
+        }
+        this.physicsConstraint.setLimit(limitHigh, limitLow, 0.9, 0.3, 1);
+      }
       let velocity = 3;
       let maxImpulse = 20;
       this.physicsConstraint.enableAngularMotor(true, velocity, maxImpulse);
