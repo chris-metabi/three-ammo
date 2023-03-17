@@ -173,6 +173,7 @@ export const WorkerHelpers = function(ammoWorker) {
     setLinearVelocity,
     setAngularVelocity,
     applyForceToBody,
-    applyImpulseToBody
+    applyImpulseToBody,
+    updateConstraint
   };
 };
