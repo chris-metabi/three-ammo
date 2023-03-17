@@ -218,10 +218,16 @@ Constraint.prototype.update = function(options) {
   
   if (options.motorVelocity != undefined) { //Hm, are these only for hinge joints, though?
     //this.physicsConstraint.setMotorTargetVelocity(options.motorVelocity);
-    this.physicsConstraint.enableAngularMotor(true,options.motorVelocity,3);//maybe??
+    let motorImpulse = this.physicsConstraint.getMaxMotorImpulse();
+    if (options.motorImpulse != undefined) {
+      motorImpulse = options.motorImpulse;
+    }
+    this.physicsConstraint.enableAngularMotor(true,options.motorVelocity,motorImpulse);
   }
-  if (options.motorImpulse != undefined) {
-    this.physicsConstraint.setMaxMotorImpulse(options.motorImpulse);
+  if (options.motorImpulse != undefined && options.motorVelocity == undefined) {
+    let motorVelocity = this.physicsConstraint.getMotorTargetVelocity();
+    //this.physicsConstraint.setMaxMotorImpulse(options.motorImpulse);
+    this.physicsConstraint.enableAngularMotor(true,motorVelocity,options.motorImpulse);
   }
   if (options.limitHigh != undefined) {
     let limitHigh = options.limitHigh;
