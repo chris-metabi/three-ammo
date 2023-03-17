@@ -135,7 +135,7 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         } else {
           limitLow = constraintConfig.limitHigh * -1;
         }
-        this.physicsConstraint.setLimit(limitHigh, limitLow, 0.9, 0.3, 1);
+        this.physicsConstraint.setLimit(limitLow, limitHigh, 0.9, 0.3, 1);
         //this.physicsConstraint.setLimit(-Math.PI/4, Math.PI/4, 0.9, 0.3, 1);
       }
       if (constraintConfig.motorVelocity != undefined) {

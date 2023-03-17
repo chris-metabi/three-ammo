@@ -313,7 +313,22 @@ function updateConstraint({ constraintId, options }) {
   if (constraints[constraintId] != undefined) {
     options = options || {};
     console.log("ammo worker trying to update constraint! options: " + JSON.stringify(options));
-    constraints[constraintId].update(options);
+    //constraints[constraintId].update(options); //Hm, is there an advantage to calling this instead of
+    //just refering to the .physicsConstraint directly?
+    if (options.motorVelocity != undefined) {
+      constraints[constraintId].physicsConstraint.setMotorTargetVelocity(options.motorVelocity);
+    }
+    if (options.motorImpulse != undefined) {
+      constraints[constraintId].physicsConstraint.setMaxMotorImpulse(options.motorImpulse);
+    }
+    if (options.limitHigh != undefined) {
+      let limitHigh = options.limitHigh;
+      let limitLow = limitHigh * -1;
+      if (options.limitLow != undefined) {
+        limitLow = options.limitLow;
+      }
+      constraints[constraintId].physicsConstraint.setLimit(limitLow,limitHigh);
+    }
   }
 }
 
