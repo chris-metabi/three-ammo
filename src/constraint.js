@@ -126,7 +126,9 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
 
       //NEW, from MeTabi:
       this.physicsConstraint.setLimit(-Math.PI/4, Math.PI/4, 0.9, 0.3, 1);
-
+      let velocity = 3;
+      let maxImpulse = 20;
+      this.physicsConstraint.enableAngularMotor(true, velocity, maxImpulse);
       ///////////////////////
 
       Ammo.destroy(pivot);
