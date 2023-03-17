@@ -214,7 +214,7 @@ Constraint.prototype.destroy = function() {
 
 Constraint.prototype.update = function(options) {
   if (!this.physicsConstraint) return;
-  console.log("Trying to update physics constraint!!!");
+  console.log("physics constraint trying to update!!!  " + JSON.stringify(options));
   //this.world.physicsWorld.updateConstraint(this.physicsConstraint);
 };
 

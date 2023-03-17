@@ -313,7 +313,7 @@ function updateConstraint({ constraintId, options }) {
   if (constraints[constraintId] != undefined) {
     options = options || {};
     console.log("ammo worker trying to update constraint! options: " + JSON.stringify(options));
-    //constraints[constraintId].setOptions(options);
+    constraints[constraintId].update(options);
   }
 }
 
