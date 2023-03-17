@@ -228,7 +228,7 @@ Constraint.prototype.update = function(options) {
     if (options.limitLow != undefined) {
       limitLow = options.limitLow;
     }
-    this.physicsConstraint.setLimit(limitLow,limitHigh);
+    this.physicsConstraint.setLimit(limitLow,limitHigh,0.9,0.3,1.0);
   }
   //this.world.physicsWorld.updateConstraint(this.physicsConstraint);
 };
