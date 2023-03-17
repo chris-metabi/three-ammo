@@ -138,15 +138,14 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         this.physicsConstraint.setLimit(limitHigh, limitLow, 0.9, 0.3, 1);
         //this.physicsConstraint.setLimit(-Math.PI/4, Math.PI/4, 0.9, 0.3, 1);
       }
-      let velocity = 3;
-      let maxImpulse = 10;
       if (constraintConfig.motorVelocity != undefined) {
-        velocity = constraintConfig.motorVelocity;
+        let velocity = constraintConfig.motorVelocity;
+        let maxImpulse = 5;
+        if (constraintConfig.motorImpulse != undefined) {
+          maxImpulse = constraintConfig.motorImpulse;
+        }
+        this.physicsConstraint.enableAngularMotor(true, velocity, maxImpulse);
       }
-      if (constraintConfig.motorImpulse != undefined) {
-        maxImpulse = constraintConfig.motorImpulse;
-      }
-      this.physicsConstraint.enableAngularMotor(true, velocity, maxImpulse);
       ///////////////////////
 
       Ammo.destroy(pivot);
