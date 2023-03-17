@@ -116,6 +116,9 @@ const tick = () => {
             delete constraints[constraintId];
           }
           break;
+        case MESSAGE_TYPES.UPDATE_CONSTRAINT:
+            updateConstraint(message);
+            break;
         case MESSAGE_TYPES.ENABLE_DEBUG:
           const enable = message.enable;
           if (!world.debugDrawer) {
@@ -303,6 +306,14 @@ function addConstraint({ constraintId, bodyUuid, targetUuid, options }) {
     }
     const constraint = new Constraint(options, bodies[bodyUuid], bodies[targetUuid], world);
     constraints[constraintId] = constraint;
+  }
+}
+
+function updateConstraint({ constraintId, options }) {
+  if (constraints[constraintId] != undefined) {
+    options = options || {};
+    console.log("ammo worker trying to update constraint! options: " + JSON.stringify(options));
+    //constraints[constraintId].setOptions(options);
   }
 }
 

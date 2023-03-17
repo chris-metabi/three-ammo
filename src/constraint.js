@@ -212,4 +212,10 @@ Constraint.prototype.destroy = function() {
   this.physicsConstraint = null;
 };
 
+Constraint.prototype.update = function(options) {
+  if (!this.physicsConstraint) return;
+  console.log("Trying to update physics constraint!!!");
+  //this.world.physicsWorld.updateConstraint(this.physicsConstraint);
+};
+
 export default Constraint;
