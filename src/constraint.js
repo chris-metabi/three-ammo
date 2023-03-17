@@ -124,6 +124,11 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         true
       );
 
+      //NEW, from MeTabi:
+      this.physicsConstraint.setLimit(-Math.PI/4, Math.PI/4, 0.9, 0.3, 1);
+
+      ///////////////////////
+
       Ammo.destroy(pivot);
       Ammo.destroy(targetPivot);
       Ammo.destroy(axis);

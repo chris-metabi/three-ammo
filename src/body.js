@@ -415,6 +415,8 @@ Body.prototype.applyForceAtCenter = function(vec) {
   let btPos = new Ammo.btVector3(0,0,0);
   this.physicsBody.applyForce(btVec,btPos);
   this.world.updateBody(this.physicsBody);
+  Ammo.destroy(btVec);
+  Ammo.destroy(btPos);
 }
 
 export default Body;
