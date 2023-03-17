@@ -215,6 +215,21 @@ Constraint.prototype.destroy = function() {
 Constraint.prototype.update = function(options) {
   if (!this.physicsConstraint) return;
   console.log("physics constraint trying to update!!!  " + JSON.stringify(options));
+  
+  if (options.motorVelocity != undefined) { //Hm, are these only for hinge joints, though?
+    this.physicsConstraint.setMotorTargetVelocity(options.motorVelocity);
+  }
+  if (options.motorImpulse != undefined) {
+    this.physicsConstraint.setMaxMotorImpulse(options.motorImpulse);
+  }
+  if (options.limitHigh != undefined) {
+    let limitHigh = options.limitHigh;
+    let limitLow = limitHigh * -1;
+    if (options.limitLow != undefined) {
+      limitLow = options.limitLow;
+    }
+    this.physicsConstraint.setLimit(limitLow,limitHigh);
+  }
   //this.world.physicsWorld.updateConstraint(this.physicsConstraint);
 };
 
