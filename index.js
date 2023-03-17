@@ -82,6 +82,14 @@ export const WorkerHelpers = function(ammoWorker) {
     });
   };
 
+  const updateConstraint = function(constraintId, options = {}) {
+    ammoWorker.postMessage({
+      type: MESSAGE_TYPES.UPDATE_CONSTRAINT,
+      constraintId,
+      options
+    });
+  };
+
   const removeConstraint = function(constraintId) {
     ammoWorker.postMessage({
       type: MESSAGE_TYPES.REMOVE_CONSTRAINT,
