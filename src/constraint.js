@@ -32,11 +32,14 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
   //let bodyOrigin = bodyTransform.getOrigin();
   //console.log("body transform origin: " + JSON.stringify(bodyOrigin));
   //if (constraintConfig.pivot != undefined) {
-  //  let pivot = new Ammo.btVector3(constraintConfig.pivot[0],constraintConfig.pivot[1],constraintConfig.pivot[2]);
+  //  let pivot = new Ammo.btVector3(constraintConfig.pivot.x,constraintConfig.pivot.y,constraintConfig.pivot.z);
   //} 
-  //if (constraintConfig.targetPivot != undefined) {
-    //let targetPivot = new Ammo.btVector3(constraintConfig.targetPivot[0],constraintConfig.targetPivot[1],constraintConfig.targetPivot[2]);
-  //}
+  if (constraintConfig.targetPivot != undefined) {
+    let targetPivot = new Ammo.btVector3(constraintConfig.targetPivot.x,constraintConfig.targetPivot.y,constraintConfig.targetPivot.z);
+    targetTransform.setOrigin(targetPivot);
+    Ammo.destroy(targetPivot);
+    console.log("setting target transform!   " + JSON.stringify(targetPivot));
+  }
   //console.log("body transform origin: " + JSON.stringify(targetTransform.getOrigin()));
 
   switch (type) {
@@ -51,28 +54,29 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
       const zero = new Ammo.btVector3(0, 0, 0);
       //TODO: allow these to be configurable
       if (constraintConfig.linearLow != undefined) {
-        let vec = new Ammo.btVector3(constraintConfig.linearLow[0], constraintConfig.linearLow[1], constraintConfig.linearLow[2]);
+        let vec = new Ammo.btVector3(constraintConfig.linearLow.x, constraintConfig.linearLow.y, constraintConfig.linearLow.z);
         this.physicsConstraint.setLinearLowerLimit(vec);
         Ammo.destroy(vec);
       } else this.physicsConstraint.setLinearLowerLimit(zero);
       if (constraintConfig.linearHigh != undefined) {
-        let vec = new Ammo.btVector3(constraintConfig.linearHigh[0], constraintConfig.linearHigh[1], constraintConfig.linearHigh[2]);
+        let vec = new Ammo.btVector3(constraintConfig.linearHigh.x, constraintConfig.linearHigh.y, constraintConfig.linearHigh.z);
         this.physicsConstraint.setLinearUpperLimit(vec);
         Ammo.destroy(vec);
       } else this.physicsConstraint.setLinearUpperLimit(zero);
       if (constraintConfig.angularLow != undefined) {
-        let vec = new Ammo.btVector3(constraintConfig.angularLow[0], constraintConfig.angularLow[1], constraintConfig.angularLow[2]);
+        let vec = new Ammo.btVector3(constraintConfig.angularLow.x, constraintConfig.angularLow.y, constraintConfig.angularLow.z);
         this.physicsConstraint.setAngularLowerLimit(vec);
         Ammo.destroy(vec);
       } else this.physicsConstraint.setAngularLowerLimit(zero);
       if (constraintConfig.angularHigh != undefined) {
-        let vec = new Ammo.btVector3(constraintConfig.angularHigh[0], constraintConfig.angularHigh[1], constraintConfig.angularHigh[2]);
+        let vec = new Ammo.btVector3(constraintConfig.angularHigh.x, constraintConfig.angularHigh.y, constraintConfig.angularHigh.z);
         this.physicsConstraint.setAngularUpperLimit(vec);
         Ammo.destroy(vec);
       } else this.physicsConstraint.setAngularUpperLimit(zero);
       Ammo.destroy(zero);
       break;
     }
+
     //TODO: test and verify all other constraint types
     case CONSTRAINT.FIXED: {
       //btFixedConstraint does not seem to debug render
