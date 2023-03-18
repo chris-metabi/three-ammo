@@ -74,11 +74,14 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         this.physicsConstraint.setAngularUpperLimit(vec);
         Ammo.destroy(vec);
       } else this.physicsConstraint.setAngularUpperLimit(zero);
-      let angXMotor = this.physicsConstraint.getRotationalLimitMotor(0);//maybe?
-      if (angXMotor != undefined) {
-        console.log("Got a rotational motor?");
+      
+      //NOPE!!! This may have been left out of ammo.js from bullet. Or maybe the version of bullet we got ammo js from. Or something. But it is not here.
+      //let angXMotor = this.physicsConstraint.getRotationalLimitMotor(0);//maybe?
+      //if (angXMotor != undefined) {
+      //  console.log("Got a rotational motor?");
         //angXMotor.m_targetVelocity = 2.0;//maybe???
-      }
+      //}
+      
       Ammo.destroy(zero);
       break;
     }
