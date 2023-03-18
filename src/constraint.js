@@ -49,18 +49,28 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         true
       );
       const zero = new Ammo.btVector3(0, 0, 0);
-      const xHigh = new Ammo.btVector3(1, 0, 0);
-      const zHighAngle = new Ammo.btVector3(0, 0, Math.PI/8);
-      const zLowAngle = new Ammo.btVector3(0, 0, Math.PI/8);
       //TODO: allow these to be configurable
-      this.physicsConstraint.setLinearLowerLimit(zero);
-      this.physicsConstraint.setLinearUpperLimit(xHigh);
-      this.physicsConstraint.setAngularLowerLimit(zLowAngle);
-      this.physicsConstraint.setAngularUpperLimit(zHighAngle);
+      if (constraintConfig.linearLow != undefined) {
+        let vec = new Ammo.btVector3(constraintConfig.linearLow[0], constraintConfig.linearLow[1], constraintConfig.linearLow[2]);
+        this.physicsConstraint.setLinearLowerLimit(vec);
+        Ammo.destroy(vec);
+      } else this.physicsConstraint.setLinearLowerLimit(zero);
+      if (constraintConfig.linearHigh != undefined) {
+        let vec = new Ammo.btVector3(constraintConfig.linearHigh[0], constraintConfig.linearHigh[1], constraintConfig.linearHigh[2]);
+        this.physicsConstraint.setLinearUpperLimit(vec);
+        Ammo.destroy(vec);
+      } else this.physicsConstraint.setLinearUpperLimit(zero);
+      if (constraintConfig.angularLow != undefined) {
+        let vec = new Ammo.btVector3(constraintConfig.angularLow[0], constraintConfig.angularLow[1], constraintConfig.angularLow[2]);
+        this.physicsConstraint.setAngularLowerLimit(vec);
+        Ammo.destroy(vec);
+      } else this.physicsConstraint.setAngularLowerLimit(zero);
+      if (constraintConfig.angularHigh != undefined) {
+        let vec = new Ammo.btVector3(constraintConfig.angularHigh[0], constraintConfig.angularHigh[1], constraintConfig.angularHigh[2]);
+        this.physicsConstraint.setAngularUpperLimit(vec);
+        Ammo.destroy(vec);
+      } else this.physicsConstraint.setAngularUpperLimit(zero);
       Ammo.destroy(zero);
-      Ammo.destroy(xHigh);
-      Ammo.destroy(zHighAngle);
-      Ammo.destroy(zLowAngle);
       break;
     }
     //TODO: test and verify all other constraint types
