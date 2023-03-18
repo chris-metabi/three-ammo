@@ -201,11 +201,11 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         throw new Error("targetPivot must be defined for type: cone-twist");
       }
 
-      const pivotTransform = new Ammo.btTransform();
-      pivotTransform.setIdentity();
-      pivotTransform
-        .getOrigin()
-        .setValue(constraintConfig.targetPivot.x, constraintConfig.targetPivot.y, constraintConfig.targetPivot.z);
+      //const pivotTransform = new Ammo.btTransform();
+      //pivotTransform.setIdentity();
+      //pivotTransform
+      //  .getOrigin()
+      //  .setValue(constraintConfig.targetPivot.x, constraintConfig.targetPivot.y, constraintConfig.targetPivot.z);
       //this.physicsConstraint = new Ammo.btConeTwistConstraint(body.physicsBody, pivotTransform);//Wha?
       this.physicsConstraint = new Ammo.btConeTwistConstraint(
         body.physicsBody,
@@ -213,7 +213,10 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         bodyTransform,
         targetTransform
       );
-      Ammo.destroy(pivotTransform);
+      this.physicsConstraint.setLimit(4,Math.PI/64);
+      this.physicsConstraint.setLimit(5,Math.PI/4);
+      this.physicsConstraint.setLimit(6,Math.PI/16);
+      //Ammo.destroy(pivotTransform);
       break;
     }
 
