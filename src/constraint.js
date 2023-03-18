@@ -35,7 +35,7 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
   }f (constraintConfig.targetPivot != undefined) {
     let targetPivot = new Ammo.btVector3(constraintConfig.targetPivot[0],constraintConfig.targetPivot[1],constraintConfig.targetPivot[2]);
   }
-  console.log("body transform origin: " + JSON.stringify(targetTransform.getOrigin()));
+  //console.log("body transform origin: " + JSON.stringify(targetTransform.getOrigin()));
 
   switch (type) {
     case CONSTRAINT.LOCK: {
