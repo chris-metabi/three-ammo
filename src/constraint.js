@@ -29,6 +29,14 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
   const targetTransform = new Ammo.btTransform();
   targetTransform.setIdentity();
 
+  let bodyOrigin = bodyTransform.getOrigin();
+  if (constraintConfig.pivot != undefined) {
+    let pivot = new Ammo.btVector3(constraintConfig.pivot[0],constraintConfig.pivot[1],constraintConfig.pivot[2]);
+  }f (constraintConfig.targetPivot != undefined) {
+    let targetPivot = new Ammo.btVector3(constraintConfig.targetPivot[0],constraintConfig.targetPivot[1],constraintConfig.targetPivot[2]);
+  }
+  console.log("body transform origin: " + JSON.stringify(targetTransform.getOrigin()));
+
   switch (type) {
     case CONSTRAINT.LOCK: {
       this.physicsConstraint = new Ammo.btGeneric6DofConstraint(
@@ -39,11 +47,13 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         true
       );
       const zero = new Ammo.btVector3(0, 0, 0);
+      const xOne = new Ammo.btVector3(1, 0, 0);
+      const zNinety = new Ammo.btVector3(0, 0, Math.PI/2);
       //TODO: allow these to be configurable
       this.physicsConstraint.setLinearLowerLimit(zero);
-      this.physicsConstraint.setLinearUpperLimit(zero);
+      this.physicsConstraint.setLinearUpperLimit(xOne);
       this.physicsConstraint.setAngularLowerLimit(zero);
-      this.physicsConstraint.setAngularUpperLimit(zero);
+      this.physicsConstraint.setAngularUpperLimit(zNinety);
       Ammo.destroy(zero);
       break;
     }
@@ -121,8 +131,8 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         targetPivot,
         axis,
         targetAxis,
-        true
-      );
+        false
+      );//last one true or false? useReferenceFrameA, defaults to false.
 
       //NEW, from MeTabi:
       console.log("Joint limits:  high " + constraintConfig.limitHigh + " low " + constraintConfig.limitLow + " " +
