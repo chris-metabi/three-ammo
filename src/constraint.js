@@ -31,14 +31,15 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
 
   //let bodyOrigin = bodyTransform.getOrigin();
   //console.log("body transform origin: " + JSON.stringify(bodyOrigin));
-  //if (constraintConfig.pivot != undefined) {
-  //  let pivot = new Ammo.btVector3(constraintConfig.pivot.x,constraintConfig.pivot.y,constraintConfig.pivot.z);
-  //} 
+  if (constraintConfig.pivot != undefined) {
+    let pivot = new Ammo.btVector3(constraintConfig.pivot.x,constraintConfig.pivot.y,constraintConfig.pivot.z);
+    bodyTransform.setOrigin(pivot);
+    Ammo.destroy(pivot);
+  } 
   if (constraintConfig.targetPivot != undefined) {
     let targetPivot = new Ammo.btVector3(constraintConfig.targetPivot.x,constraintConfig.targetPivot.y,constraintConfig.targetPivot.z);
     targetTransform.setOrigin(targetPivot);
     Ammo.destroy(targetPivot);
-    console.log("setting target transform!   " + JSON.stringify(targetPivot));
   }
   //console.log("body transform origin: " + JSON.stringify(targetTransform.getOrigin()));
 
