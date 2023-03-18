@@ -29,7 +29,8 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
   const targetTransform = new Ammo.btTransform();
   targetTransform.setIdentity();
 
-  //let bodyOrigin = bodyTransform.getOrigin();
+  let bodyOrigin = bodyTransform.getOrigin();
+  console.log("body transform origin: " + JSON.stringify(bodyOrigin));
   //if (constraintConfig.pivot != undefined) {
   //  let pivot = new Ammo.btVector3(constraintConfig.pivot[0],constraintConfig.pivot[1],constraintConfig.pivot[2]);
   //} 
