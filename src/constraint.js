@@ -81,7 +81,7 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
       //  console.log("Got a rotational motor?");
         //angXMotor.m_targetVelocity = 2.0;//maybe???
       //}
-      
+
       Ammo.destroy(zero);
       break;
     }
@@ -206,10 +206,18 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
       pivotTransform
         .getOrigin()
         .setValue(constraintConfig.targetPivot.x, constraintConfig.targetPivot.y, constraintConfig.targetPivot.z);
-      this.physicsConstraint = new Ammo.btConeTwistConstraint(body.physicsBody, pivotTransform);
+      //this.physicsConstraint = new Ammo.btConeTwistConstraint(body.physicsBody, pivotTransform);//Wha?
+      this.physicsConstraint = new Ammo.btConeTwistConstraint(
+        body.physicsBody,
+        targetBody.physicsBody,
+        bodyTransform,
+        targetTransform
+      );
       Ammo.destroy(pivotTransform);
       break;
     }
+
+
     case CONSTRAINT.POINT_TO_POINT: {
       if (!constraintConfig.pivot) {
         throw new Error("pivot must be defined for type: point-to-point");
