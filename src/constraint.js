@@ -74,6 +74,10 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         this.physicsConstraint.setAngularUpperLimit(vec);
         Ammo.destroy(vec);
       } else this.physicsConstraint.setAngularUpperLimit(zero);
+      let angXMotor = this.physicsConstraint.getRotationalLimitMotor(0);//maybe?
+      if (angXMotor != undefined) {
+        angXMotor.m_targetVelocity = 2.0;//maybe???
+      }
       Ammo.destroy(zero);
       break;
     }
