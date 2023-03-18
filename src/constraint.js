@@ -29,8 +29,8 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
   const targetTransform = new Ammo.btTransform();
   targetTransform.setIdentity();
 
-  let bodyOrigin = bodyTransform.getOrigin();
-  console.log("body transform origin: " + JSON.stringify(bodyOrigin));
+  //let bodyOrigin = bodyTransform.getOrigin();
+  //console.log("body transform origin: " + JSON.stringify(bodyOrigin));
   //if (constraintConfig.pivot != undefined) {
   //  let pivot = new Ammo.btVector3(constraintConfig.pivot[0],constraintConfig.pivot[1],constraintConfig.pivot[2]);
   //} 
@@ -49,16 +49,18 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         true
       );
       const zero = new Ammo.btVector3(0, 0, 0);
-      const xOne = new Ammo.btVector3(1, 0, 0);
-      const zNinety = new Ammo.btVector3(0, 0, Math.PI/2);
+      const xHigh = new Ammo.btVector3(1, 0, 0);
+      const zHighAngle = new Ammo.btVector3(0, 0, Math.PI/8);
+      const zLowAngle = new Ammo.btVector3(0, 0, Math.PI/8);
       //TODO: allow these to be configurable
       this.physicsConstraint.setLinearLowerLimit(zero);
-      this.physicsConstraint.setLinearUpperLimit(xOne);
-      this.physicsConstraint.setAngularLowerLimit(zero);
-      this.physicsConstraint.setAngularUpperLimit(zNinety);
+      this.physicsConstraint.setLinearUpperLimit(xHigh);
+      this.physicsConstraint.setAngularLowerLimit(zLowAngle);
+      this.physicsConstraint.setAngularUpperLimit(zHighAngle);
       Ammo.destroy(zero);
-      Ammo.destroy(xOne);
-      Ammo.destroy(zNinety);
+      Ammo.destroy(xHigh);
+      Ammo.destroy(zHighAngle);
+      Ammo.destroy(zLowAngle);
       break;
     }
     //TODO: test and verify all other constraint types
