@@ -29,12 +29,13 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
   const targetTransform = new Ammo.btTransform();
   targetTransform.setIdentity();
 
-  let bodyOrigin = bodyTransform.getOrigin();
-  if (constraintConfig.pivot != undefined) {
-    let pivot = new Ammo.btVector3(constraintConfig.pivot[0],constraintConfig.pivot[1],constraintConfig.pivot[2]);
-  }f (constraintConfig.targetPivot != undefined) {
-    let targetPivot = new Ammo.btVector3(constraintConfig.targetPivot[0],constraintConfig.targetPivot[1],constraintConfig.targetPivot[2]);
-  }
+  //let bodyOrigin = bodyTransform.getOrigin();
+  //if (constraintConfig.pivot != undefined) {
+  //  let pivot = new Ammo.btVector3(constraintConfig.pivot[0],constraintConfig.pivot[1],constraintConfig.pivot[2]);
+  //} 
+  //if (constraintConfig.targetPivot != undefined) {
+    //let targetPivot = new Ammo.btVector3(constraintConfig.targetPivot[0],constraintConfig.targetPivot[1],constraintConfig.targetPivot[2]);
+  //}
   //console.log("body transform origin: " + JSON.stringify(targetTransform.getOrigin()));
 
   switch (type) {
@@ -55,6 +56,8 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
       this.physicsConstraint.setAngularLowerLimit(zero);
       this.physicsConstraint.setAngularUpperLimit(zNinety);
       Ammo.destroy(zero);
+      Ammo.destroy(xOne);
+      Ammo.destroy(zNinety);
       break;
     }
     //TODO: test and verify all other constraint types
