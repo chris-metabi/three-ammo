@@ -213,9 +213,12 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         bodyTransform,
         targetTransform
       );
-      this.physicsConstraint.setLimit(4,Math.PI/64);
-      this.physicsConstraint.setLimit(5,Math.PI/4);
-      this.physicsConstraint.setLimit(6,Math.PI/16);
+      
+      if (constraintConfig.angularHigh != undefined) {
+        this.physicsConstraint.setLimit(4,constraintConfig.angularHigh.x);
+        this.physicsConstraint.setLimit(5,constraintConfig.angularHigh.y);
+        this.physicsConstraint.setLimit(6,constraintConfig.angularHigh.z);
+      } 
       //Ammo.destroy(pivotTransform);
       break;
     }
