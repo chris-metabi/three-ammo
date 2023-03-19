@@ -226,7 +226,7 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         }
       }
       this.physicsConstraint.enableMotor(true);
-      let q = new Ammo.btQuaternion(0.707,0,0,0.707);
+      let q = new Ammo.btQuaternion(0,0,0.707,0.707);
       this.physicsConstraint.setMaxMotorImpulse(1.0);
       this.physicsConstraint.setMotorTarget(q);//maybe???
       Ammo.destroy(q);
