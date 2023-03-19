@@ -278,8 +278,8 @@ Constraint.prototype.destroy = function() {
 
 Constraint.prototype.update = function(options) {
   if (!this.physicsConstraint) return;
-  console.log("physics constraint trying to update!!!  " + this.physicsConstraint.type);
-  if (this.physicsConstraint.type == "hinge") {
+  console.log("physics constraint trying to update!!!  " + this.physicsConstraint.className);
+  if (options.motorVelocity != undefined) { //(this.physicsConstraint.type == "hinge") {
 
     if (options.motorVelocity != undefined) { //Hm, are these only for hinge joints, though?
       //this.physicsConstraint.setMotorTargetVelocity(options.motorVelocity);
@@ -302,7 +302,7 @@ Constraint.prototype.update = function(options) {
       }
       this.physicsConstraint.setLimit(limitLow,limitHigh,0.9,0.3,1.0);
     }
-  } else if (this.physicsConstraint.type == "coneTwist") {
+  } else if (options.motorTarget != undefined) { //(this.physicsConstraint.type == "coneTwist") {
     if (options.motorImpulse != undefined || options.motorTarget != undefined) {
       let impulse = 1;
       if (options.motorImpulse != undefined) {
