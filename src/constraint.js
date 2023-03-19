@@ -214,12 +214,13 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         targetTransform
       );
       
+      //setLimit: this is set up so that the first axis (3) is Twist, and the other two are Swing1 and Swing2. Not sure which is which.
       if (constraintConfig.angularHigh != undefined) {
-        if (constraintConfig.angularHigh.x > 0) {
-          this.physicsConstraint.setLimit(3,constraintConfig.angularHigh.x);
+        if (constraintConfig.angularHigh.y > 0) {
+          this.physicsConstraint.setLimit(3,constraintConfig.angularHigh.y);
         }
-        if (constraintConfig.angularHigh.y > 0) { 
-          this.physicsConstraint.setLimit(4,constraintConfig.angularHigh.y);
+        if (constraintConfig.angularHigh.x > 0) { 
+          this.physicsConstraint.setLimit(4,constraintConfig.angularHigh.x);
         }
         if  (constraintConfig.angularHigh.z > 0) {
           this.physicsConstraint.setLimit(5,constraintConfig.angularHigh.z);
@@ -277,30 +278,34 @@ Constraint.prototype.destroy = function() {
 
 Constraint.prototype.update = function(options) {
   if (!this.physicsConstraint) return;
-  console.log("physics constraint trying to update!!!  " + JSON.stringify(options));
+  console.log("physics constraint trying to update!!!  " + this.physicsConstraint.type);
+  if (this.physicsConstraint.type == "hinge") {
+
+    if (options.motorVelocity != undefined) { //Hm, are these only for hinge joints, though?
+      //this.physicsConstraint.setMotorTargetVelocity(options.motorVelocity);
+      let motorImpulse = 3; //this.physicsConstraint.getMaxMotorImpulse();//NOPE!! 
+      if (options.motorImpulse != undefined) {
+        motorImpulse = options.motorImpulse;
+      }
+      this.physicsConstraint.enableAngularMotor(true,options.motorVelocity,motorImpulse);
+    }
+    if (options.motorImpulse != undefined && options.motorVelocity == undefined) {
+      let motorVelocity = 1;//this.physicsConstraint.getMotorTargetVelocity();//NOPE!! 
+      //this.physicsConstraint.setMaxMotorImpulse(options.motorImpulse);
+      this.physicsConstraint.enableAngularMotor(true,motorVelocity,options.motorImpulse);
+    }
+    if (options.limitHigh != undefined) {
+      let limitHigh = options.limitHigh;
+      let limitLow = limitHigh * -1;
+      if (options.limitLow != undefined) {
+        limitLow = options.limitLow;
+      }
+      this.physicsConstraint.setLimit(limitLow,limitHigh,0.9,0.3,1.0);
+    }
+  } else if (this.physicsConstraint.type == "hinge") {
+
+  }
   
-  if (options.motorVelocity != undefined) { //Hm, are these only for hinge joints, though?
-    //this.physicsConstraint.setMotorTargetVelocity(options.motorVelocity);
-    let motorImpulse = 3; //this.physicsConstraint.getMaxMotorImpulse();//NOPE!! 
-    if (options.motorImpulse != undefined) {
-      motorImpulse = options.motorImpulse;
-    }
-    this.physicsConstraint.enableAngularMotor(true,options.motorVelocity,motorImpulse);
-  }
-  if (options.motorImpulse != undefined && options.motorVelocity == undefined) {
-    let motorVelocity = 1;//this.physicsConstraint.getMotorTargetVelocity();//NOPE!! 
-    //this.physicsConstraint.setMaxMotorImpulse(options.motorImpulse);
-    this.physicsConstraint.enableAngularMotor(true,motorVelocity,options.motorImpulse);
-  }
-  if (options.limitHigh != undefined) {
-    let limitHigh = options.limitHigh;
-    let limitLow = limitHigh * -1;
-    if (options.limitLow != undefined) {
-      limitLow = options.limitLow;
-    }
-    this.physicsConstraint.setLimit(limitLow,limitHigh,0.9,0.3,1.0);
-  }
-  //this.world.physicsWorld.updateConstraint(this.physicsConstraint);
 };
 
 export default Constraint;
