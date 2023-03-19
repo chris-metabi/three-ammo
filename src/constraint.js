@@ -224,8 +224,11 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
         if  (constraintConfig.angularHigh.z > 0) {
           this.physicsConstraint.setLimit(5,constraintConfig.angularHigh.z);
         }
-      } 
-      //Ammo.destroy(pivotTransform);
+      }
+      this.physicsConstraint.enableMotor(true);
+      let q = new Ammo.btQuaternion(0.707,0,0,0.707);
+      this.physicsConstraint.setMotorTarget(q);//maybe???
+      Ammo.destroy(q);
       break;
     }
 
