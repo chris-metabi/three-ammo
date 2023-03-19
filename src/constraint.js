@@ -226,11 +226,11 @@ const Constraint = function(constraintConfig, body, targetBody, world) {
           this.physicsConstraint.setLimit(5,constraintConfig.angularHigh.z);
         }
       }
-      this.physicsConstraint.enableMotor(true);
-      let q = new Ammo.btQuaternion(0,0,0.707,0.707);
-      this.physicsConstraint.setMaxMotorImpulse(1.0);
-      this.physicsConstraint.setMotorTarget(q);//maybe???
-      Ammo.destroy(q);
+      //this.physicsConstraint.enableMotor(true);
+      //let q = new Ammo.btQuaternion(0,0,0.707,0.707);
+      //this.physicsConstraint.setMaxMotorImpulse(1.0);
+      //this.physicsConstraint.setMotorTarget(q);//maybe???
+      //Ammo.destroy(q);
       break;
     }
 
@@ -302,10 +302,25 @@ Constraint.prototype.update = function(options) {
       }
       this.physicsConstraint.setLimit(limitLow,limitHigh,0.9,0.3,1.0);
     }
-  } else if (this.physicsConstraint.type == "hinge") {
-
+  } else if (this.physicsConstraint.type == "coneTwist") {
+    if (options.motorImpulse != undefined || options.motorTarget != undefined) {
+      let impulse = 1;
+      if (options.motorImpulse != undefined) {
+        impulse = options.motorImpulse;
+      }
+      this.physicsConstraint.enableMotor(true);
+      this.physicsConstraint.setMaxMotorImpulse(1.0);
+      if (options.motorTarget != undefined) { //copy ammo quaternion from three quaternion
+        let q = new Ammo.btQuaternion(options.motorTarget.x,options.motorTarget.y,options.motorTarget.z,options.motorTarget.w);
+        this.physicsConstraint.setMotorTarget(q);
+        Ammo.destroy(q);
+      } else {
+        let q = new Ammo.btQuaternion(0,0,0,1);
+        this.physicsConstraint.setMotorTarget(q);
+        Ammo.destroy(q);
+      }
+    }
   }
-  
 };
 
 export default Constraint;
