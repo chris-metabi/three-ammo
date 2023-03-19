@@ -312,7 +312,7 @@ function addConstraint({ constraintId, bodyUuid, targetUuid, options }) {
 function updateConstraint({ constraintId, options }) {
   if (constraints[constraintId] != undefined) {
     options = options || {};
-    console.log("ammo worker trying to update constraint! options: " + JSON.stringify(options));
+    console.log("ammo worker updating constraint! options: " + JSON.stringify(options));
     constraints[constraintId].update(options); //Hm, is there an advantage to calling this instead of
     //just refering to the .physicsConstraint directly?
     /*
