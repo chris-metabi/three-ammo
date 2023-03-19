@@ -311,7 +311,7 @@ Constraint.prototype.update = function(options) {
       this.physicsConstraint.enableMotor(true);
       this.physicsConstraint.setMaxMotorImpulse(1.0);
       if (options.motorTarget != undefined) { //copy ammo quaternion from three quaternion
-        let q = new Ammo.btQuaternion(options.motorTarget.x,options.motorTarget.y,options.motorTarget.z,options.motorTarget.w);
+        let q = new Ammo.btQuaternion(options.motorTarget[0],options.motorTarget[1],options.motorTarget[2],options.motorTarget[3]);
         this.physicsConstraint.setMotorTarget(q);
         Ammo.destroy(q);
       } else {
