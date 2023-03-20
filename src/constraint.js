@@ -278,7 +278,7 @@ Constraint.prototype.destroy = function() {
 
 Constraint.prototype.update = function(options) {
   if (!this.physicsConstraint) return;
-  console.log("physics constraint trying to update!!!  " + this.physicsConstraint.class);
+  console.log("physics constraint updating, type  =  " + options.type);
   if (options.motorVelocity != undefined) { //(this.physicsConstraint.type == "hinge") {
 
     if (options.motorVelocity != undefined) { //Hm, are these only for hinge joints, though?
