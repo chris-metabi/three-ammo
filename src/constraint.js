@@ -304,12 +304,12 @@ Constraint.prototype.update = function(options) {
     }
   } else if (options.motorTarget != undefined) { //(this.physicsConstraint.type == "coneTwist") {
     if (options.motorImpulse != undefined || options.motorTarget != undefined) {
-      let impulse = 1;
+      let motorImpulse = 1;
       if (options.motorImpulse != undefined) {
-        impulse = options.motorImpulse;
+        motorImpulse = options.motorImpulse;
       }
       this.physicsConstraint.enableMotor(true);
-      this.physicsConstraint.setMaxMotorImpulse(1.0);
+      this.physicsConstraint.setMaxMotorImpulse(motorImpulse);
       if (options.motorTarget != undefined) { //copy ammo quaternion from three quaternion
         let q = new Ammo.btQuaternion(options.motorTarget[0],options.motorTarget[1],options.motorTarget[2],options.motorTarget[3]);
         this.physicsConstraint.setMotorTarget(q);
