@@ -139,6 +139,9 @@ const tick = () => {
         case MESSAGE_TYPES.ACTIVATE_BODY:
           activateBody(message);
           break;
+        case MESSAGE_TYPES.DEACTIVATE_BODY:
+          deactivateBody(message);
+          break;
         case MESSAGE_TYPES.SET_LINEAR_VELOCITY:
           setLinearVelocity(message);
           break;
@@ -348,6 +351,12 @@ function resetDynamicBody({ uuid }) {
 function activateBody({ uuid }) {
   if (bodies[uuid]) {
     bodies[uuid].physicsBody.activate();
+  }
+}
+
+function deactivateBody({ uuid }) {
+  if (bodies[uuid]) {
+    bodies[uuid].physicsBody.activate(false);
   }
 }
 
