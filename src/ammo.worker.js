@@ -356,7 +356,7 @@ function activateBody({ uuid }) {
 
 function deactivateBody({ uuid }) {
   if (bodies[uuid]) {
-    bodies[uuid].physicsBody.activate(false);
+    bodies[uuid].physicsBody.activate(false);//Maybe??
   }
 }
 
