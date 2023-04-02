@@ -154,6 +154,9 @@ const tick = () => {
         case MESSAGE_TYPES.APPLY_IMPULSE:
           applyImpulseToBody(message);
           break;
+        case MESSAGE_TYPES.APPLY_TORQUE:
+          applyTorque(message);
+          break;
         default:
           console.error("Unknown message in queue", message);
           break;

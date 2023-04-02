@@ -166,6 +166,14 @@ export const WorkerHelpers = function(ammoWorker) {
     });
   };
 
+  const applyTorque = function(uuid,vec) {
+    ammoWorker.postMessage({
+      type: MESSAGE_TYPES.APPLY_TORQUE,
+      uuid,
+      vec
+    });
+  };
+
   return {
     addBody,
     updateBody,
@@ -181,6 +189,7 @@ export const WorkerHelpers = function(ammoWorker) {
     setAngularVelocity,
     applyForceToBody,
     applyImpulseToBody,
+    applyTorque,
     updateConstraint
   };
 };
