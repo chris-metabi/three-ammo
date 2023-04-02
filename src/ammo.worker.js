@@ -378,9 +378,9 @@ function setAngularVelocity({ uuid, vec }) {
 function applyTorque({ uuid, vec }) {
   
   if (bodies[uuid]) {
-    bodies[uuid].physicsBody.applyLocalTorque(vec);
+    //bodies[uuid].physicsBody.applyLocalTorque(vec);
     //bodies[uuid].physicsBody.applyTorque(vec);
-    //bodies[uuid].physicsBody.applyTorqueImpulse(vec);
+    bodies[uuid].physicsBody.applyTorqueImpulse(vec);
   }
 }
 
