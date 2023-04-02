@@ -127,6 +127,13 @@ export const WorkerHelpers = function(ammoWorker) {
     });
   };
 
+  const deactivateBody = function(uuid) {
+    ammoWorker.postMessage({
+      type: MESSAGE_TYPES.DEACTIVATE_BODY,
+      uuid
+    });
+  };
+
   const setLinearVelocity = function(uuid,vec) {
     ammoWorker.postMessage({
       type: MESSAGE_TYPES.SET_LINEAR_VELOCITY,
